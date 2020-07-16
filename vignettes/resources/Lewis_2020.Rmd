@@ -1,10 +1,10 @@
 ---
-title: "Resources: Parallel computing with R using foreach, future, and other packages"
+title: "Parallel computing with R using foreach, future, and other packages"
 author: Bryan Lewis
 date: January 30, 2020
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Resources: Parallel computing with R using foreach, future, and other packages}
+  %\VignetteIndexEntry{Parallel computing with R using foreach, future, and other packages}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

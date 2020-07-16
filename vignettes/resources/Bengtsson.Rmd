@@ -1,10 +1,10 @@
 ---
-title: "Future"
+title: "Future: Simple Async, Parallel & Distributed Processing in R - What's Next?"
 author: Henrik Bengtsson
 date: January 30, 2020
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Future}
+  %\VignetteIndexEntry{Future: Simple Async, Parallel & Distributed Processing in R - What's Next?}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Future: Simple Async, Parallel \& Distributed Processing in R - What's Next\?
+Future: Simple Async, Parallel & Distributed Processing in R - What's Next?
 
 Henrik Bengtsson's talk at the rstudio::conf 2020.
 

@@ -1,10 +1,10 @@
 ---
-title: "Resources: Parallel and High Performace Computing with R"
+title: "Parallel and High Performace Computing with R"
 author: Ge Baolai
 date: February 17, 2016
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Resources: Parallel and High Performace Computing with R}
+  %\VignetteIndexEntry{Parallel and High Performace Computing with R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
