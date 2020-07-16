@@ -1,0 +1,39 @@
+---
+title: "Resources: Parallel computing with R using foreach, future, and other packages"
+author: Bryan Lewis
+date: January 30, 2020
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Resources: Parallel computing with R using foreach, future, and other packages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+Bryan Lewis's talk at the rstudio::conf 2020.
+
+## Abstract
+
+[From rstudio.com](https://rstudio.com/resources/rstudioconf-2020/parallel-computing-with-r-using-foreach-future-and-other-packages/)
+
+Steve Weston's foreach package defines a simple but powerful framework
+for map/reduce and list-comprehension-style parallel computation in R.
+One of its great innovations is the ability to support many interchangeable back-end computing systems
+so that *the same R code* can run sequentially,
+in parallel on your laptop, or across a supercomputer.
+Recent new packages like future package define elegant new programming approaches
+that can use the foreach framework to run across a wide variety of parallel computing systems.
+This talk introduces the basics of foreach and future packages with examples
+using a variety of back-end systems including MPI, Redis and R's default parallel package clusters.
+
+## Video
+
+[From rstudio.com](https://rstudio.com/resources/rstudioconf-2020/parallel-computing-with-r-using-foreach-future-and-other-packages/)

@@ -1,0 +1,24 @@
+destination: docs
+url: https://github.com/jeksterslabds/jeksterslabRpar/
+
+articles:
+- title: Introduction to jeksterslabRpar
+  navbar: ~
+  contents:
+  - jeksterslabRpar
+- title: Notes
+  desc: >
+    Repository of notes related to jeksterslabRpar.
+  contents:
+  - starts_with("notes")
+- title: Resources
+  desc: >
+    These articles provide links to resources related to jeksterslabRpar.
+  contents:
+  - starts_with("resources")
+- title: Tests
+  desc: >
+    These articles document the tests performed using testthat.
+  contents:
+  - starts_with("test")
+  

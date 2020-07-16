@@ -1,0 +1,33 @@
+---
+title: "Introduction to Parallel Computing with R (useR!2017)"
+author: Hana Ševčíková
+date: July 4, 2017
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Parallel Computing with R (useR!2017)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+Hana Ševčíková presented an excellent tutorial at the useR!2017 conference in Belgium.
+The tutorial was recorded and is available on YouTube.
+The Github repository of the tutorial notes are also available.
+
+## YouTube Videos
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rlbeZv_cxJw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GoYqgZbOfcQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Github Repository
+
+[hanase/useR2017](https://github.com/hanase/useR2017)

@@ -1,0 +1,46 @@
+---
+title: "Future"
+author: Henrik Bengtsson
+date: January 30, 2020
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Future}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+Future: Simple Async, Parallel \& Distributed Processing in R - What's Next\?
+
+Henrik Bengtsson's talk at the rstudio::conf 2020.
+
+## Abstract
+
+[From rstudio.com](https://rstudio.com/resources/rstudioconf-2020/future-simple-async-parallel-distributed-processing-in-r-what-s-next/)
+
+Future is a minimal and unifying framework for asynchronous, parallel, and distributed computing in R.
+It is designed for robustness, consistency, scalability, extendability, and adoptability -
+all in the spirit of "developer writes code once, user runs it anywhere".
+It is being used in production for high-performance computing and asynchronous UX,
+among other things.
+In this talk,
+I will discuss common feature requests,
+recent progress we have made, and what is the pipeline.
+
+## Video
+
+[From rstudio.com](https://rstudio.com/resources/rstudioconf-2020/future-simple-async-parallel-distributed-processing-in-r-what-s-next/)
+
+## Slides
+
+[Slides](https://www.jottr.org/2020/02/01/future-rstudioconf2020-slides/)
+
+[Slides](https://docs.google.com/presentation/d/1Wn5S91UGIOrc4IyXoV074ij5vGF8I0Km0tCfintyIa4/present?includes_info_params=1&eisi=CM2mhIXwsecCFQyuJgodBQAJ8A&slide=id.p)

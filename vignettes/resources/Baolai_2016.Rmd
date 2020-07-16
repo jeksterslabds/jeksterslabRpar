@@ -1,0 +1,38 @@
+---
+title: "Resources: Parallel and High Performace Computing with R"
+author: Ge Baolai
+date: February 17, 2016
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Resources: Parallel and High Performace Computing with R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+This webinar features R and parallelization in the context of Monte Carlo simulations.
+
+## Abstract
+
+[From sharcnet.ca](https://www.sharcnet.ca/help/index.php/Webinar_2016_Parallel_and_high_performance_computing_with_R)
+
+In this seminar we will talk about the use of R in a parallel processing environment.
+We will discuss the general issues concerning the performance of R code,
+the intrinsic features of R and parallelization by looking at a few simple examples of Monte Carlo simulations.
+The targeted audience are those who have had experience with R but not much with parallel processing.
+
+## Slides
+
+[From sharcnet.ca](https://www.sharcnet.ca/help/images/3/36/Webinar2016-parallel-hpc-R.pdf)
+
+## YouTube Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NWgOkKorFH4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

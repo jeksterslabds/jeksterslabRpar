@@ -1,0 +1,32 @@
+---
+title: "Introduction to jeksterslabRpar"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+description: >
+  Learn how to get started with the basics of jeksterslabRpar.
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Introduction to jeksterslabRpar}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+`jeksterslabRpar` is a collection of helper functions for parallel processing.
+
+## Installation
+
+You can install the released version of `jeksterslabRpar` from [GitHub](https://github.com/jeksterslabds/jeksterslabRpar) with:
+
+```r
+library(devtools)
+install_github("jeksterslabds/jeksterslabRpar")
+```

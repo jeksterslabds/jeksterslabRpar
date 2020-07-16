@@ -1,0 +1,170 @@
+---
+title: "Notes: future_plan"
+author: "Ivan Jacob Agaloos Pesigan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Notes: future_plan}
+  %\VignetteEngine{knitr::rmarkdown}
+  %VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+## Examples of using `future_plan()` in the context of `foreach()`
+
+```{r setup}
+library(foreach)
+library(parallel)
+library(doParallel)
+library(microbenchmark)
+library(jeksterslabRpar)
+```
+
+This function quickly enables the user
+to toggle between `sequential` and `multiprocess` strategies
+with an option to set a custom strategy when needed.
+To set `strategy` to `sequential`,
+specify `par = FALSE`.
+To set `strategy` to `multiprocess`,
+specify `par = FALSE`.
+When used with `foreach()`,
+this function enables the user
+to set the future `strategy`
+with ease and without making changes to the
+funtion that executes the task.
+
+### Sequential
+
+In the case below,
+the `foreach()` function call
+is evaluated using the `sequential`
+strategy.
+
+```{r}
+future_plan(par = FALSE)
+foreach(i = 1:5) %dopar% {
+  rnorm(n = 5)
+}
+```
+
+### Multiprocess
+
+Below is an example of using
+the `multiprocess` strategy.
+
+```{r}
+future_plan(par = TRUE)
+foreach(i = 1:5) %dopar% {
+  rnorm(n = 5)
+}
+```
+
+```{r, echo = FALSE}
+future_plan(par = FALSE)
+```
+
+## Benchmarking
+
+```{r}
+# variables used repeatedly
+R <- 2
+n <- 2
+benchmark_times <- 2
+X <- rep(
+  x = n,
+  times = R
+)
+FUN <- rnorm
+ncores <- detectCores()
+```
+
+The goal is to
+generate `r R` random normal data sets 
+with a sample size of `r n` each.
+The benchmark is run `r benchmark_times` times.
+
+For easier comparison,
+the `R` code above are wrapped in a function called `foreach_future()`.
+Other similar implementations of the same task are explored.
+
+### Functions
+
+#### `future_plan`
+
+```{r}
+foreach_future <- function(par, foreach_seq = FALSE, R, n) {
+  # set strategy
+  future_plan(par = par, foreach_seq = foreach_seq)
+  # for loop
+  foreach(i = 1:R) %dopar% {
+    rnorm(n = n)
+  }
+  # back to sequential after use
+  future_plan(par = FALSE)
+}
+```
+
+#### Vanilla for `loop`
+
+```{r}
+for_loop <- function(R, n) {
+  out <- vector(
+    mode = "list",
+    length = R
+  )
+  for (i in 1:R) {
+    out[[i]] <- rnorm(n = n)
+  }
+  out
+}
+```
+
+#### `par_lapply()`
+
+```{r}
+par_lapply
+```
+
+### Microbenchmark
+
+```{r}
+microbenchmark(
+  # Serial
+  foreach_seq = foreach_future(par = FALSE, foreach_seq = TRUE, R = R, n = n),
+  sequential = foreach_future(par = FALSE, foreach_seq = FALSE, R = R, n = n),
+  lapply = par_lapply(X = X, FUN = FUN, par = FALSE),
+  for_loop = for_loop(R = R, n = n),
+  # Parallel
+  ## Future
+  multiprocess = foreach_future(par = TRUE, R = R, n = n),
+  multisession = foreach_future(par = multisession, R = R, n = n),
+  ## Parallel versions of lapply
+  mclapply = par_lapply(X = X, FUN = FUN, par = TRUE, mc = TRUE, ncores = ncores),
+  parLapply = par_lapply(X = X, FUN = FUN, par = TRUE, mc = FALSE, ncores = ncores),
+  parLapplyLB = par_lapply(X = X, FUN = FUN, par = TRUE, mc = FALSE, lb = TRUE, ncores = ncores),
+  times = benchmark_times
+)
+```
+
+Results from the benchmark
+for the current example
+shows that parallelizing a task
+does not necessarily improve speed
+relative to the serial counterpart.
+You have to consider the overhead cost of parallelizing your task
+and decide if the cost is tolerable
+in relation to the total time spent running a task.
+A good frame of mind is to make your code run efficiently
+on a single processor first and only parallelize
+when the overhead cost is worth taking.
+When you decide to parallelize,
+make sure to perform benchmarks
+to determine if you are going to get a significant increase in speed.
