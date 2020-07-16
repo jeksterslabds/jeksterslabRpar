@@ -23,7 +23,8 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(foreach)
 library(parallel)
-library(doParallel)
+library(future)
+library(doFuture)
 library(microbenchmark)
 library(jeksterslabRpar)
 ```

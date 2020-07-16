@@ -96,6 +96,9 @@ par_lapply <- function(X,
   if (par) {
     # turn off implicit parallelism in blas--------------------------------------
     blas_set_num_threads(threads = 1)
+    on.exit(
+      blas_set_num_threads(threads = blas_get_num_procs())
+    )
     # get os---------------------------------------------------------------------
     os <- get_os()
     #----------------------------------------------------------------------------
