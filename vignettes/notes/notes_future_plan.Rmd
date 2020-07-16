@@ -75,9 +75,9 @@ future_plan(par = FALSE)
 
 ```{r}
 # variables used repeatedly
-R <- 2
-n <- 2
-benchmark_times <- 2
+R <- 1000
+n <- 100
+benchmark_times <- 100
 X <- rep(
   x = n,
   times = R
