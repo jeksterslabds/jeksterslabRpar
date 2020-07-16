@@ -89,6 +89,7 @@ par_lapply <- function(X,
                        cl_expr,
                        cl_vars,
                        rbind = NULL) {
+
   # turn all run options off-----------------------------------------------------
   run_mclapply <- run_parLapplyLB <- run_parLapply <- setup_cluster <- run_lapply <- FALSE
   #------------------------------------------------------------------------------
@@ -100,6 +101,27 @@ par_lapply <- function(X,
       blas_set_num_threads(threads = blas_get_num_procs())
     )
     # get os---------------------------------------------------------------------
+get_os <- function() {
+  sysinf <- Sys.info()
+  if (!is.null(sysinf)) {
+    os <- sysinf["sysname"]
+    if (os == "Darwin") {
+      os <- "osx"
+    }
+  } else {
+    ## mystery machine
+    os <- .Platform$OS.type
+    if (grepl("^darwin",R.version$os)
+    ) {
+      os <- "osx"
+    }
+    if (grepl("linux-gnu", R.version$os)
+    ) {
+      os <- "linux"
+    }
+  }
+  tolower(os)
+}
     os <- get_os()
     #----------------------------------------------------------------------------
     # negotiate mc --------------------------------------------------------------
