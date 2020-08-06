@@ -171,7 +171,7 @@ par_lapply <- function(X,
     if (cl_eval) {
       clusterEvalQ(
         cl,
-        expr = cl_expr
+        expr = eval(cl_expr)
       )
     }
     if (cl_export) {
