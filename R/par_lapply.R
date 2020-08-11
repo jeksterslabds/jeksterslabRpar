@@ -13,6 +13,13 @@
 #' @param ncores Integer.
 #' Number of cores to use if `par = TRUE`.
 #' If unspecified, defaults to `detectCores() - 1`.
+#' @param blas_threads Logical.
+#' If `TRUE`, set BLAS threads using `blas_set_num_threads(threads = blas_get_num_procs())`.
+#' If `FALSE`, set BLAS threads using `blas_set_num_threads(threads = 1)`.
+#' If `par = TRUE`, `blas_threads` is automatically set to `FALSE`
+#' to prevent conflicts in parallel processing.
+#' This argument is useful when `FUN` can handle implicit parallelism
+#' when `par = FALSE`, for example linear algebra operations.
 #' @param mc Logical.
 #' If `TRUE`, use [`parallel::mclapply()`].
 #' If `FALSE`, use [`parallel::parLapply()`] or [`parallel::parLapplyLB()`].
@@ -82,6 +89,7 @@ par_lapply <- function(X,
                        ...,
                        par = TRUE,
                        ncores = NULL,
+                       blas_threads = FALSE,
                        mc = TRUE,
                        lb = FALSE,
                        cl_eval = FALSE,
@@ -89,17 +97,18 @@ par_lapply <- function(X,
                        cl_expr,
                        cl_vars,
                        rbind = NULL) {
-
+  # reset threads on exit
+  on.exit(
+    blas_set_num_threads(threads = blas_get_num_procs())
+  )
+  #------------------------------------------------------------------------------
   # turn all run options off-----------------------------------------------------
   run_mclapply <- run_parLapplyLB <- run_parLapply <- setup_cluster <- run_lapply <- FALSE
   #------------------------------------------------------------------------------
   # negotiate which function to run----------------------------------------------
   if (par) {
     # turn off implicit parallelism in blas--------------------------------------
-    blas_set_num_threads(threads = 1)
-    on.exit(
-      blas_set_num_threads(threads = blas_get_num_procs())
-    )
+    blas_threads <- FALSE
     # get os---------------------------------------------------------------------
     get_os <- function() {
       sysinf <- Sys.info()
@@ -165,13 +174,22 @@ par_lapply <- function(X,
     bind <- FALSE
   }
   #------------------------------------------------------------------------------
+  # blas-------------------------------------------------------------------------
+  if (blas_threads) {
+    # turn on implicit parallelism-----------------------------------------------
+    blas_set_num_threads(threads = blas_get_num_procs())
+  } else {
+    # turn off implicit parallelism in blas--------------------------------------
+    blas_set_num_threads(threads = 1)
+  }
+  #------------------------------------------------------------------------------
   # execute----------------------------------------------------------------------
   if (setup_cluster) {
     cl <- makeCluster(ncores)
     if (cl_eval) {
       clusterEvalQ(
         cl,
-        expr = cl_expr      
+        expr = cl_expr
       )
     }
     if (cl_export) {
@@ -208,10 +226,6 @@ par_lapply <- function(X,
       ...
     )
   }
-  # turn on implicit parallelism-------------------------------------------------
-  # make sure that no parallel processes are run after this
-  blas_set_num_threads(threads = blas_get_num_procs())
-  #------------------------------------------------------------------------------
   if (run_lapply) {
     out <- lapply(
       X = X,
